@@ -12,26 +12,28 @@ class QuizRepository (
     private val quizDao: QuizDao
 ){
     suspend fun refreshQuestions(category: Int, difficulty: String) {
-        try {
-            val response = apiService.getQuestions(category = category, difficulty = difficulty)
-            if (response.responseCode == 0) {
-                val entities = response.results.map { dto ->
-                    Question(
-                        id = UUID.randomUUID().toString(),
-                        category = dto.category,
-                        difficulty = dto.difficulty,
-                        questionText = dto.question,
-                        correctAnswer = dto.correctAnswer,
-                        wrongAnswer1 = dto.incorrectAnswers[0],
-                        wrongAnswer2 = dto.incorrectAnswers[1],
-                        wrongAnswer3 = dto.incorrectAnswers[2]
-                    )
+        val response = apiService.getQuestions(category = category, difficulty = difficulty)
+        when (response.responseCode) {
+            0 -> {
+                if (response.results != null) {
+                    val entities = response.results.map { dto ->
+                        Question(
+                            id = UUID.randomUUID().toString(),
+                            category = dto.category,
+                            questionText = dto.question,
+                            correctAnswer = dto.correctAnswer,
+                            wrongAnswer1 = dto.incorrectAnswers?.getOrNull(0) ?: "",
+                            wrongAnswer2 = dto.incorrectAnswers?.getOrNull(1) ?: "",
+                            wrongAnswer3 = dto.incorrectAnswers?.getOrNull(2) ?: "",
+                            difficulty = dto.difficulty
+                        )
+                    }
+                    quizDao.clearQuestions()
+                    quizDao.insertQuestions(entities)
                 }
-                quizDao.clearQuestions()
-                quizDao.insertQuestions(entities)
             }
-        } catch (e: Exeption) {
-            e.printStackTrace()
+            5 -> throw Exception("Rate limit exceeded. Please wait a few seconds.")
+            else -> throw Exception("API Error: Code ${response.responseCode}")
         }
     }
     suspend fun getQuestionsFromDb(category: String): List<Question> {
@@ -42,5 +44,7 @@ class QuizRepository (
         quizDao.insertGameResult(result)
     }
 
-    suspend fun getGameHistory(): Flow<List<GameResult>> = quizDao.getAllGameResults()
+    fun getGameHistory(): Flow<List<GameResult>> = quizDao.getAllGameResults()
+
+    fun getBestResults(): Flow<List<GameResult>> = quizDao.getBestResultsByCategory()
 }
