@@ -1,8 +1,11 @@
 package com.example.myapplication.data.remote
 
+import com.google.gson.annotations.SerializedName
+
 data class TriviaResponse (
+    @SerializedName("response_code")
     val responseCode: Int,
-    val results: List<QuestionDto>
+    val results: List<QuestionDto>?
 )
 
 data class QuestionDto(
@@ -10,6 +13,8 @@ data class QuestionDto(
     val type: String,
     val difficulty: String,
     val question: String,
+    @SerializedName("correct_answer")
     val correctAnswer: String,
-    val incorrectAnswers: List<String>
+    @SerializedName("incorrect_answers")
+    val incorrectAnswers: List<String>?
 )

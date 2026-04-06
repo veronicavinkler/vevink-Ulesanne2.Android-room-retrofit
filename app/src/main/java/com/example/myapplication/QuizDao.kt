@@ -23,6 +23,9 @@ interface QuizDao {
      @Insert(onConflict = OnConflictStrategy.REPLACE)
      suspend fun insertGameResult(result: GameResult)
 
-     @Query("SELECT * FROM game_history ORDER BY score DESC")
+     @Query("SELECT * FROM game_history ORDER BY id DESC")
      fun getAllGameResults(): Flow<List<GameResult>>
+
+     @Query("SELECT * FROM (SELECT * FROM game_history ORDER BY score DESC, date DESC) GROUP BY category")
+     fun getBestResultsByCategory(): Flow<List<GameResult>>
 }
