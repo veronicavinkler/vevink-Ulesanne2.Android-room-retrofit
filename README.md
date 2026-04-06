@@ -4,10 +4,10 @@ Androidi rakendus, mis võimaldab kasutajatel panna proovile oma teadmised erine
 
 ## Funktsioonid
 1. Kategooriate valik:
-- üldteadmised,
-- ajalugu,
-- arvutid,
-- sport
+  - üldteadmised,
+  - ajalugu,
+  - arvutid,
+  - sport
 2. Küsimused salvestatakse kohalikku Room andmebaasi. Kui internet puudub või API piirangud tulevad vastu, saab ikkagi mängida varem laaditud küsimustega.
 3. Jälgi oma varasemaid sooritusi – salvestatakse kuupäev, kategooria ja skoor.
 4. Näe oma parimaid tulemusi iga kategooria lõikes eraldi vaates.
@@ -22,7 +22,7 @@ Androidi rakendus, mis võimaldab kasutajatel panna proovile oma teadmised erine
 - Navigatsioon: Jetpack Navigation Compose.
 
 ## Paigaldamine
-Joosta git clone https://github.com/veronicavinkler/vevink-Ulesanne2.Android-room-retrofit.git
-Ava projekt Android Studios.
-Teostada Grandle Sync.
-Käivita rakendus emulaatoris või päris seadmes.
+1. Joosta git clone https://github.com/veronicavinkler/vevink-Ulesanne2.Android-room-retrofit.git
+2. Ava projekt Android Studios.
+3. Teostada Grandle Sync.
+4. Käivita rakendus emulaatoris või päris seadmes.
