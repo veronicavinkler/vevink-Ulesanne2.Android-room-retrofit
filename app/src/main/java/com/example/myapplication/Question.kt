@@ -11,5 +11,6 @@ data class Question (
     val correctAnswer: String,
     val wrongAnswer1: String,
     val wrongAnswer2: String,
-    val wrongAnswer3: String
+    val wrongAnswer3: String,
+    val difficulty: String
 )
