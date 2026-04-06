@@ -21,5 +21,8 @@ Androidi rakendus, mis võimaldab kasutajatel panna proovile oma teadmised erine
 - Asünkroonsus: Kotlin Coroutines & Flow andmevoogude haldamiseks.
 - Navigatsioon: Jetpack Navigation Compose.
 
-  ## Paigaldamine
-  
+## Paigaldamine
+Joosta git clone https://github.com/veronicavinkler/vevink-Ulesanne2.Android-room-retrofit.git
+Ava projekt Android Studios.
+Teostada Grandle Sync.
+Käivita rakendus emulaatoris või päris seadmes.
